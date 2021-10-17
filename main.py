@@ -8,6 +8,10 @@ from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 import cufflinks as cf
 import plotly.graph_objects as go
 
+# Import modules
+from orbitPhysics import OrbitPhysics
+from plotController import PlotController
+
 G = 4 * PI.pi**2
 
 def euler_method(x0, y0, vx0, vy0, relativeHoleMass, relativeStarMass, xPositions, yPositions):
@@ -46,6 +50,9 @@ def print_plot(xPositions, yPositions):
     plt.show()
 
 def main():
+    # Initialize necessary classes
+    orbits = OrbitPhysics()
+
     # DEFNINIM LES VARIABLES INCICIALS
     distanceFromHoleToStar = 1.49e+11 # Distància del forat negre a l'estrella en astronomical units
     starPeriod = 3.1514e+7 # Període en segons de l'estrella al voltant del forat negre
@@ -70,7 +77,7 @@ def main():
     xvels = [perihelionVX0]
     yvels = [perihelionVY0]
 
-    totalEnergy = euler_method(perihelionX0, perihelionY0, perihelionVX0, perihelionVY0, 1, starMassInBlackHoleRelation, xPos, yPos)
+    totalEnergy = orbits.euler_method(perihelionX0, perihelionY0, perihelionVX0, perihelionVY0, 1, starMassInBlackHoleRelation, xPos, yPos)
     print_plot(xPos, yPos)
 
 
